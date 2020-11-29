@@ -1,0 +1,133 @@
+* {
+  color: white;
+  font-family: fantasy, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin:0px;
+}
+
+body {
+  background-color: black;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 20px;
+}
+
+.hidden {
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+}
+
+.visible {
+    visibility: visible;
+    position: static;
+}
+
+#events {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  display: grid;
+  }
+
+#highlight {
+  color: orangered;
+}
+
+#hud {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 12px;
+}
+
+#playerTile {
+  background-color: #333;
+  border-radius: 5px;
+  padding: 12px;
+}
+
+#actionTile {
+  background-color: rgb(247, 109, 109);
+  border-radius: 5px;
+  padding: 12px;
+}
+
+#buttonBar {
+  margin-top: 10px;
+}
+
+#visual {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  height: 200px;
+}
+
+#visualImage {
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url('/images/forest.jpeg');
+  height: 200px;;
+}
+
+.actionBtn {
+  border-radius: 5px;
+  border: 2px solid darkslateblue;
+  background-color: #333;
+  color: black;
+  font-size: 15px;
+  padding: 2px 8px;
+}
+
+#hitBtn {
+  background-color: red;
+}
+
+#reBtn {
+  background-color: blue;
+}
+
+#talkBtn {
+  background-color: aquamarine;
+}
+
+#invBtn {
+  background-color: lawngreen;
+}
+
+#shBtn {
+  background-color: chocolate;
+}
+
+/* please add styles for direction buttons! */
+
+#inventory {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  height: 100px;
+}
+
+#shop {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  height: 100px;
+}
+
+#talk {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  height: 100px;
+}
+

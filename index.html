@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Naruto!</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body onkeypress="processKey(event);">
+    <div id="header">
+      <h1>Naruto</h1>
+    </div>
+    <div>
+      <p id="events"><mark id="highlight"></mark></p>
+    </div>
+    <div id="hud">
+      <div id="playerTile">
+        <h3 onClick="javascript:renamePlayer();">Player</h3>
+        <span id="playerName">(Click "Player" above to choose name)</span><br />
+        Level: <span id="playerLevel"></span>
+        Chakra: <span id="playerChakra"></span>
+        Health: <span id="playerHealth"></span>
+        <div id="playerImage">
+          <img src="/images/yo.jpeg">
+        </div>
+      </div>
+      <div id="actionTile">
+      </div>
+    </div>
+    <div id="buttonBar">
+      <button class="actionBtn" id="hitBtn" onClick="attack();">Attack</button>
+      <button class="actionBtn" id="reBtn" onClick="recharge();" >Recharge</button>
+      <button class="actionBtn" id="talkBtn" onClick="toggleDivVis('talk');" >Talk</button>
+      <button class="actionBtn" id="invBtn" onClick="toggleDivVis('inventory');" >Inventory</button>
+      <button class="actionBtn" id="shBtn" onClick="toggleDivVis('shop');" >Shop</button>
+      <button class="actionBtn" id="westBtn" onClick="recharge();" >West</button>
+      <button class="actionBtn" id="northBtn" onClick="recharge();" >North</button>
+      <button class="actionBtn" id="southBtn" onClick="recharge();" >South</button>
+      <button class="actionBtn" id="eastBtn" onClick="recharge();" >East</button>
+    </div>
+    <div id="talk" class="hidden">
+    </div>
+    <div id="inventory" class="hidden">     
+    </div>
+    <div id="shop" class="hidden">
+    </div>
+    <div id="visual">
+      <canvas id="game" width="640px" height="400px"></canvas>
+    </div>
+    
+    <script type="text/javascript" src="/js/tile.js"></script>
+    <script src="/js/script.js"></script>
+  </body>
+</html>
