@@ -1,5 +1,14 @@
+const gameUpdate = () => {
+  drawMapPaths();
+  updateMapEnemies();
+  updateMapNPCs();
+  player.update();
+  requestAnimationFrame(gameUpdate);
+}
+
 //draw tile map
-function drawMap() {
+
+const drawMapPaths = () => {
   for (var y = 0; y < mapH; y++) {
     for (var x = 0; x < mapW; x++) {
       switch(gameMap[y][x]) {
@@ -12,10 +21,6 @@ function drawMap() {
       ctx.fillRect(x*tileW,y*tileH,tileW,tileH);
     }
   }
-  updateMapEnemies();
-  updateMapNPCs();
-  player.update();
-  requestAnimationFrame(drawMap);
 }
 
 // check to see if a tile location is open to move into
@@ -31,45 +36,29 @@ function updateMapEnemies() {
     let y = thisEnemy.y;
     ctx.fillStyle = "#EE9999";
     ctx.fillRect(x*tileW,y*tileH,tileW,tileH);
-    if (x == player.x && y == player.y) {
-      engageEnemy(thisEnemy);
-    };
    });
 }
 
 function updateMapNPCs() {
-  player.npc = null;
   npcs.forEach( (thisNPC, index) => {
     let x = thisNPC.x;
     let y = thisNPC.y;
     ctx.fillStyle = "#46B012";
     ctx.fillRect(x*tileW,y*tileH,tileW,tileH);
-    if (x == player.x && y == player.y) {
-      player.npc = thisNPC;
-      engageNPC(thisNPC);      
-    };
   });
-  const shop = document.getElementById("shopDiv");
-  if (player.npc == null) {
-    shop.innerHTML = "There's no shop here!";
-  } else {
-    const npc = player.npc;
-    shop.innerHTML = `${npc.type} ${npc.name}'s Shop:<ul>`;
-    npc.inventory.forEach(slot => {
-      shop.innerHTML += `<li><a href="javascript:buy(${slot.item});"> ${slot.item.name} (${slot.qty})</a></li>`;
-    });
-    shop.innerHTML += "</ul>";
-  }
 }
 
 function engageEnemy(enemy) {
   player.enemy = enemy;
   updateActionTile('Enemy', enemy.img, enemy.name, `Level: <span id="enemyLevel">${enemy.level}</span> Chakra: <span id="enemyChakra">${enemy.chakra}</span> Health: <span id="enemyHealth">${enemy.health}</span>`);
+  updateMessageTile("You encounter the enemy " + enemy.name + "!");
+
 }
 
 function engageNPC(npc) {
   player.npc = npc;
   updateActionTile("NPC", npc.img, npc.name, npc.type);
+  updateMessageTile("You encounter the NPC " + npc.name + "!");
 }
 
 function disengage() {
@@ -79,8 +68,36 @@ function disengage() {
   updateMessageTile('You are wandering through a vast and mysterious wilderness.');
 }
 
+function updateShop() {
+  const shop = document.getElementById("shopDiv");
+  const npc = player.npc;
+  if (npc == null) {
+    shop.innerHTML = "There's no shop here!";
+  } else {
+    shop.innerHTML = `${npc.type} ${npc.name}'s Shop:<ul>`;
+    npc.inventory.forEach(slot => {
+      shop.innerHTML += `<li><a href="javascript:buy(${slot.item});"> ${slot.item.name} (${slot.qty})</a></li>`;
+    });
+    shop.innerHTML += "</ul>";
+  }
+}
+
+function updateTalk() {
+  const talk = document.getElementById("talkDiv");
+  const enemy = player.enemy;
+  const npc = player.npc;
+  if (npc != null) {
+    talk.innerHTML = `You are talking to ${npc.name}`;
+  } else if (enemy != null) {
+    talk.innerHTML = `You are talking to ${enemy.name}`;
+  } else {
+    talk.innerHTML = `Talking to yourself?`;
+  }
+}
+
+
 function updateActionTile(title, img, entity="", details="") {
-   let tile = document.getElementById('actionTile');
+   const tile = document.getElementById('actionTile');
    tile.innerHTML = `<h3>${title}</h3>`;
    tile.innerHTML += `${entity}<br />${details}<br />`;
    tile.innerHTML += `<div><img  src="${img}"></div>`;

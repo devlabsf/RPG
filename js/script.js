@@ -43,15 +43,6 @@ function toggleDivVis(div) {
     thisDiv.classList.remove("hidden");
     thisDiv.classList.add("visible");
   }
-  thisDiv.innerHTML = "<h4>" + div.toUpperCase() + "</h4>";
-  if (div == 'talk') {
-    if (enemy != null) {
-      thisDiv.innerHTML += "<p>You are talking with " + enemy.name;
-    }
-    else if (npc != null) {
-      thisDiv.innerHTML += "<p>You are talking with " + npc.name;
-    }
-  }
 }
 
 // general function to return a random item from a list (array)
@@ -94,7 +85,7 @@ function renamePlayer() {
 
 function initPlayer() {
 // new players should choose from a set list of starting configs
-// each of which comes with a class, chakra, health, <img>, <icn>. 
+// each would come with a class, chakra, health, <img>, <icn>. 
 // so all this init stuff should be done in the constructor
 
 // GENERIC PLAYER
@@ -114,7 +105,6 @@ function initPlayer() {
 }
 
 // MAIN BEGINS HERE //
-// I'm not sure that we should be saving and loading data.
 //loadData();
 //saveData();
 //setInterval(saveData, 30000);
@@ -125,4 +115,4 @@ document.body.addEventListener("keydown", (event) => {
   processKey(event) 
 });
 
-requestAnimationFrame(drawMap);
+requestAnimationFrame(gameUpdate);

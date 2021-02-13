@@ -63,22 +63,21 @@ class Player {
     // fix this code to take into account weapons and armor.
     let playerAttack = Math.round(Math.random() * this.chakra * this.weapon.attack);
     this.chakra = (this.chakra * 0.9).toFixed(1);
-    updateMessageTile("You attacked enemy for " + playerAttack + " damage");
+    updateMessageTile("You attacked enemy for " + playerAttack + " damage!");
     this.enemy.health -= playerAttack;
     document.getElementById('playerChakra').innerText = player.chakra;
 
     if (this.enemy.health <= 0) {
       // to do: prevent spamming of Attack button
-      // to do: remove enemy from tile map and enemy array
       for( var i = 0; i < enemies.length; i++){ 
         if ( enemies[i] == this.enemy) { 
             enemies.splice(i, 1); 
         }
       }
-      this.enemy = null;
       updateMessageTile("You won!");
       updateActionTile("You defeated " + this.enemy.name + "! Believe it!", "/images/tombstone.png");
       this.level++;
+      this.enemy = null;
       document.getElementById('playerLevel').innerText = this.level;
       return;
     }
@@ -86,17 +85,16 @@ class Player {
 
     setTimeout( function() {
       let enemyAttack = Math.round(Math.random() * player.enemy.chakra);
-      player.enemy.chakra = (player.enemy.chakra * 0.9).toFixed(1);;
-      updateMessageTile("Enemy attacked you for " + enemyAttack + " damage");
+      updateMessageTile("Enemy attacked you for " + enemyAttack + " damage!");
       player.health -= enemyAttack;
       if (player.health <= 0) {
-        // you die!
         // to do: really end game
         player.setImg('/images/tombstone.png');
-        updateMessageTile("You lost!");
+        updateMessageTile("You died!");
         document.getElementById('playerHealth').innerText = 'R.I.P.';
         return;
       }
+      player.enemy.chakra = (player.enemy.chakra * 0.9).toFixed(1);
       document.getElementById('playerHealth').innerText = player.health;
     }, 2000);
   }
@@ -130,25 +128,29 @@ class Player {
       default:
         break;
     }
-    updateMapEnemies();
-    updateMapNPCs();
-    if (player.enemy != null) {
-      updateMessageTile("You encounter the enemy " + enemy.name + "!");
-    }
-    else if (player.npc != null) {
-      updateMessageTile("You encounter the NPC " + npc.name + "!");
-    }
-    else {
-      disengage();
-    }
+    disengage();
+    enemies.forEach( (enemy) => {
+      if (enemy.x == this.x && enemy.y == this.y) {
+        this.npc = enemy;
+        engageEnemy(enemy);      
+      };
+    });
+    npcs.forEach( (npc) => {
+      if (npc.x == this.x && npc.y == this.y) {
+        this.npc = npc;
+        engageNPC(npc);
+        console.log("bingo:" + this.npc.name);  
+      };
+    });
+    updateShop();
+    updateTalk();
   }
 
   update() {
-    // draw player image
+    // update player image, inventory
     document.getElementById("playerImage").innerHTML = '<img src="' + player.img + '" />';
     const margin = (tileW - this.size) / 2;
     ctx.drawImage(document.getElementById('player'), this.x * tileW + margin, this.y * tileH + margin, this.size, this.size);
-    // update inventory
     let iDiv = document.getElementById("inventoryDiv");iDiv.innerHTML = 'INVENTORY<ul>';
     this.inventory.forEach(slot => {
       iDiv.innerHTML += `<li>${slot.item.name} (${slot.qty})</li>`;
@@ -168,6 +170,7 @@ class Enemy {
     this.y = null;
     this.inventory = [];
     this.img = path;
+    this.discovered = 1;
     this.aggro = 0;
   }
   setImg(path) {
@@ -189,7 +192,7 @@ class NPC {
     this.inventory = [];
     this.speech = [];
     this.img = imgPath;
-    this.discovered = 0;
+    this.discovered = 1;
   }
   setImg(imgPath) {
     this.img = imgPath;
