@@ -9,6 +9,7 @@ body {
   margin-left: 24px;
   margin-right: 24px;
   margin-top: 20px;
+  max-width: 690px;
 }
 
 .hidden {
@@ -22,18 +23,11 @@ body {
     position: static;
 }
 
-#events {
-  background-color: #666;
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 5px;
-  display: grid;
-  }
-
 #highlight {
   color: orangered;
 }
 
+/* PAGE SECTIONS, TOP TO BOTTOM */
 #hud {
   background-color: #666;
   margin-top: 12px;
@@ -56,24 +50,18 @@ body {
   padding: 12px;
 }
 
-#buttonBar {
-  margin-top: 10px;
-}
-
-#visual {
+#messageTile {
   background-color: #666;
   margin-top: 12px;
   padding: 12px;
   border-radius: 5px;
-  height: 200px;
-}
+  display: grid;
+  }
 
-#visualImage {
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-image: url('/images/forest.jpeg');
-  height: 200px;;
+
+/* Buttons */
+#buttonBar {
+  margin-top: 10px;
 }
 
 .actionBtn {
@@ -84,30 +72,25 @@ body {
   font-size: 15px;
   padding: 2px 8px;
 }
+#hitBtn {  background-color: red; }
+#reBtn {  background-color: rgb(81, 81, 245); }
+#talkBtn {  background-color: aquamarine; }
+#invBtn {  background-color: lawngreen; }
+#shBtn {  background-color: chocolate; }
 
-#hitBtn {
-  background-color: red;
+/* Collapsable divs for NPC interaction */
+#inventoryDiv {
+  background-color: #666;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 5px;
 }
 
-#reBtn {
-  background-color: blue;
+#inventoryDiv li {
+  margin-left: 20px;
 }
 
-#talkBtn {
-  background-color: aquamarine;
-}
-
-#invBtn {
-  background-color: lawngreen;
-}
-
-#shBtn {
-  background-color: chocolate;
-}
-
-/* please add styles for direction buttons! */
-
-#inventory {
+#shopDiv {
   background-color: #666;
   margin-top: 12px;
   padding: 12px;
@@ -115,7 +98,16 @@ body {
   height: 100px;
 }
 
-#shop {
+#shopDiv li {
+  margin-left: 20px;
+}
+
+#shopDiv a {
+  text-decoration: none;
+  color: orange;
+}
+
+#talkDiv {
   background-color: #666;
   margin-top: 12px;
   padding: 12px;
@@ -123,11 +115,15 @@ body {
   height: 100px;
 }
 
-#talk {
+#gameDiv {
   background-color: #666;
   margin-top: 12px;
-  padding: 12px;
+  padding: 14px;
   border-radius: 5px;
-  height: 100px;
+  height: 200px;
 }
 
+/* We'll need to use a spritesheet eventually */
+#characters {
+  display: none;
+}

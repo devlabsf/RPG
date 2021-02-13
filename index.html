@@ -6,49 +6,53 @@
     <title>Naruto!</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body onkeypress="processKey(event);">
+  <body>
     <div id="header">
       <h1>Naruto</h1>
     </div>
-    <div>
-      <p id="events"><mark id="highlight"></mark></p>
-    </div>
     <div id="hud">
       <div id="playerTile">
-        <h3 onClick="javascript:renamePlayer();">Player</h3>
-        <span id="playerName">(Click "Player" above to choose name)</span><br />
+        <h3>Player</h3>
+        <span id="playerName" onClick="renamePlayer();">>(Click to change)</span><br />
         Level: <span id="playerLevel"></span>
         Chakra: <span id="playerChakra"></span>
         Health: <span id="playerHealth"></span>
-        <div id="playerImage">
-          <img src="/images/yo.jpeg">
-        </div>
+        <div id="playerImage"></div>
       </div>
       <div id="actionTile">
+        <img id="actionImage" src='/images/forest.jpeg' />
       </div>
     </div>
+    <div id="messageTile">
+    </div>
     <div id="buttonBar">
-      <button class="actionBtn" id="hitBtn" onClick="attack();">Attack</button>
-      <button class="actionBtn" id="reBtn" onClick="recharge();" >Recharge</button>
-      <button class="actionBtn" id="talkBtn" onClick="toggleDivVis('talk');" >Talk</button>
-      <button class="actionBtn" id="invBtn" onClick="toggleDivVis('inventory');" >Inventory</button>
-      <button class="actionBtn" id="shBtn" onClick="toggleDivVis('shop');" >Shop</button>
-      <button class="actionBtn" id="westBtn" onClick="recharge();" >West</button>
-      <button class="actionBtn" id="northBtn" onClick="recharge();" >North</button>
-      <button class="actionBtn" id="southBtn" onClick="recharge();" >South</button>
-      <button class="actionBtn" id="eastBtn" onClick="recharge();" >East</button>
+      <button class="actionBtn" id="hitBtn" onClick="player.attack();">Attack</button>
+      <button class="actionBtn" id="reBtn" onClick="player.recharge();" >Recharge</button>
+      <button class="actionBtn" id="talkBtn" onClick="toggleDivVis('talkDiv');" >Talk</button>
+      <button class="actionBtn" id="invBtn" onClick="toggleDivVis('inventoryDiv');" >Inventory</button>
+      <button class="actionBtn" id="shBtn" onClick="toggleDivVis('shopDiv');" >Shop</button>
     </div>
-    <div id="talk" class="hidden">
+    <div id="talkDiv" class="hidden">
     </div>
-    <div id="inventory" class="hidden">     
+    <div id="inventoryDiv" class="hidden">     
     </div>
-    <div id="shop" class="hidden">
+    <div id="shopDiv" class="hidden">
     </div>
-    <div id="visual">
-      <canvas id="game" width="640px" height="400px"></canvas>
+    <div id="gameDiv">
+      <canvas id="game" width="740px" height="280px"></canvas>
     </div>
-    
-    <script type="text/javascript" src="/js/tile.js"></script>
+    <!-- not implemented yet, but spritesheet can be loaded here -->
+    <div id="characters" class="hidden">
+      <img id="player" src="/images/ninja.png" width="16" height="16">
+    </div>
+
+    <script src="/js/classes.js"></script>
+    <script src="/js/items.js"></script>
+    <script src="/js/tile.js"></script>
+    <script src="/js/npcs.js"></script>
+    <script src="/js/enemies.js"></script>
     <script src="/js/script.js"></script>
   </body>
 </html>
+                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                         
